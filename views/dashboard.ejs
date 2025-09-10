@@ -1,0 +1,50 @@
+
+<div class="max-w-4xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Task Dashboard</h2>
+  <form action="/tasks/add" method="POST" class="mb-8 bg-white p-6 rounded-lg shadow-md">
+    <h3 class="text-xl font-semibold mb-4">Add New Task</h3>
+    <div class="mb-4">
+      <label for="title" class="block text-sm font-medium">Title</label>
+      <input type="text" id="title" name="title" class="w-full p-2 border rounded" required>
+    </div>
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium">Description</label>
+      <textarea id="description" name="description" class="w-full p-2 border rounded"></textarea>
+    </div>
+    <button type="submit" class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Add Task</button>
+  </form>
+
+  <h3 class="text-xl font-semibold mb-4">Your Tasks</h3>
+  <div class="grid gap-4">
+    <% tasks.forEach(task => { %>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <h4 class="text-lg font-medium"><%= task.title %></h4>
+        <p class="text-gray-600"><%= task.description || 'No description' %></p>
+        <p class="text-sm text-gray-500">Status: <%= task.status %></p>
+        <p class="text-sm text-gray-500">Created: <%= task.createdAt.toLocaleString() %></p>
+        <p class="text-sm text-gray-500">Updated: <%= task.updatedAt.toLocaleString() %></p>
+        <form action="/tasks/<%= task._id %>/edit" method="POST" class="mt-4">
+          <div class="mb-2">
+            <label for="title-<%= task._id %>" class="block text-sm font-medium">Title</label>
+            <input type="text" id="title-<%= task._id %>" name="title" value="<%= task.title %>" class="w-full p-2 border rounded" required>
+          </div>
+          <div class="mb-2">
+            <label for="description-<%= task._id %>" class="block text-sm font-medium">Description</label>
+            <textarea id="description-<%= task._id %>" name="description" class="w-full p-2 border rounded"><%= task.description || '' %></textarea>
+          </div>
+          <div class="mb-2">
+            <label for="status-<%= task._id %>" class="block text-sm font-medium">Status</label>
+            <select id="status-<%= task._id %>" name="status" class="w-full p-2 border rounded">
+              <option value="pending" <%= task.status === 'pending' ? 'selected' : '' %>>Pending</option>
+              <option value="completed" <%= task.status === 'completed' ? 'selected' : '' %>>Completed</option>
+            </select>
+          </div>
+          <button type="submit" class="bg-green-600 text-white p-2 rounded hover:bg-green-700">Update</button>
+        </form>
+        <form action="/tasks/<%= task._id %>/delete" method="POST" class="inline-block ml-2">
+            <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700">Delete</button>
+          </form>
+      </div>
+    <% }) %>
+  </div>
+</div>

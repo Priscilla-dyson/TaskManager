@@ -1,0 +1,14 @@
+<nav class="bg-blue-600 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-xl font-bold">Task Manager</a>
+    <div>
+      <% if (user) { %>
+        <span class="mr-4">Welcome, <%= user.username %></span>
+        <a href="/logout" class="hover:underline">Logout</a>
+      <% } else { %>
+        <a href="/login" class="mr-4 hover:underline">Login</a>
+        <a href="/signup" class="hover:underline">Signup</a>
+      <% } %>
+    </div>
+  </div>
+</nav>
