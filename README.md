@@ -62,4 +62,4 @@ This is a Task Manager Web Application developed for the Cool Enterprises intern
 - Sessions are stored in Redis for performance.
 
 ## Submission
-This project is hosted on GitHub at `<your-github-repo-link>`.
+This project is hosted on GitHub at `<https://github.com/Priscilla-dyson/TaskManager.git>`.
